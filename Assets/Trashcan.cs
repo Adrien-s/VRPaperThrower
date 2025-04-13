@@ -11,6 +11,20 @@ public class Trashcan : MonoBehaviour
 
     public void InsideTrash(GameObject gameObject)
     {
-        gameObject.SetActive(false);
+        // Score + reset
+        ScoreManager.Instance.AddPoint();
+
+        // Respawn
+        Respawnable respawn = gameObject.GetComponent<Respawnable>();
+        if (respawn != null)
+        {
+            respawn.Respawn();
+        }
+        else
+        {
+            // fallback : désactive si pas de script Respawnable
+            gameObject.SetActive(false);
+        }
     }
+
 }
